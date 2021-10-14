@@ -1,0 +1,22 @@
+
+
+
+.DJ
+{
+    margin-top: 0;
+    
+   box-shadow: 5px 5px 5px 3px grey;
+    width: 100%;
+}
+
+body{
+    background-size: cover;
+}
+
+canvas
+{
+    border: 5px solid white;
+    border-radius: 20px;
+    margin-top: 50px;
+    box-shadow: 5px 5px 5px 3px grey;
+}
