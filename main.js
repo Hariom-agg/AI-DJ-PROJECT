@@ -1,9 +1,12 @@
 
-
+song1_status = "";
+song2_status = "";
 song1 = "";
 song2 = "";
 leftWrist_X = "";
 leftWrist_Y = "";
+score_leftWrist = "";
+score_rightWrist = "";
 rightWrist_X = "";
 rightWrist_Y = "";
 
@@ -35,6 +38,9 @@ function gotResult(results)
      if(results.length > 0)
      {
          console.log(results);
+         score_leftWrist = results[0].pose.keypoints[9].score;
+         score_rightWrist = results[0].pose.keypoints[10].score;
+         console.log("score_leftWrist = " + score_leftWrist);
          leftWrist_X = results[0].pose.leftWrist.x;
          leftWrist_Y = results[0].pose.leftWrist.y;
          console.log("leftWrist_X = " + leftWrist_X + "leftWrist_Y = " + leftWrist_Y);
@@ -51,4 +57,37 @@ function gotResult(results)
 function draw()
 {
     image(video, 0, 0, 500, 400);
+
+    fill("#FF0000");
+    stroke("#FF0000");
+
+    song1_status = song1.isPlaying();
+    song2_status = song2.isPlaying();
+
+    if(score_rightWrist > 0.2)
+    {
+        circle(rightWrist_X,rightWrist_Y,20);
+
+         song2.stop();
+
+         if(song1_status == false)
+         {
+             song1.play();
+             document.getElementById("head_name").innerHTML = "Playing song1";
+         }
+    }
+
+    if(score_leftWrist > 0.2)
+    {
+        circle(leftWrist_X,leftWrist_Y,20);
+
+         song1.stop();
+
+         if(song2_status == false)
+         {
+             song2.play();
+             document.getElementById("head_name").innerHTML = "Playing song2";
+         }
+    }
+    
 }
